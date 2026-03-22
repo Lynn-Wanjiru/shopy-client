@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+/* Dark Mode Support */
+@supports (selector(:has(*))) {
+  :root {
+    color-scheme: light;
+  }
+  
+  :root.dark {
+    color-scheme: dark;
+  }
+}
+
+/* Ensure dark mode applies to entire page */
+html.dark {
+  background-color: rgb(17, 24, 39) !important;
+}
+
+html.dark body {
+  background-color: rgb(17, 24, 39) !important;
+}
+
+/* Dark mode for all elements */
+.dark {
+  background-color: rgb(17, 24, 39);
+}
+
+.dark * {
+  border-color: rgb(55, 65, 81);
+}
+
+/* Dark mode for specific element types */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: rgb(31, 41, 55);
+  color: rgb(243, 244, 246);
+  border-color: rgb(75, 85, 99);
+}
+
+.dark nav {
+  background-color: rgb(31, 41, 55);
+}
+
+/* Ensure links and text inherit proper colors in dark mode */
+.dark a {
+  color: inherit;
+}
+
+.dark div {
+  color: inherit;
+}
+
+/* Navbar keeps bright text in dark mode */
+.dark nav {
+  color: rgb(243, 244, 246);
+}
+
+.dark nav * {
+  color: rgb(243, 244, 246);
+}
+
+/* Ensure black text stays black in dark mode */
+.dark .text-black {
+  color: #000000 !important;
+}
+
+/* Handle Tailwind dark: prefixed classes properly */
+.dark .dark\:text-black,
+.dark [class*="dark:text-black"] {
+  color: #000000 !important;
+}
+
+/* Force dark:text-gray-800 to be dark/black in dark mode */
+.dark .dark\:text-gray-800,
+.dark .text-gray-800 {
+  color: #1f2937 !important;
+}
+
+/* Force any element with text-black to stay black in dark mode */
+.dark p.text-black,
+.dark span.text-black,
+.dark h1.text-black,
+.dark h2.text-black,
+.dark h3.text-black,
+.dark h4.text-black,
+.dark h5.text-black,
+.dark h6.text-black,
+.dark button.text-black,
+.dark a.text-black {
+  color: #000000 !important;
+}
+
+/* Make light grey text black/dark in light mode for readability */
+.text-gray-500 {
+  color: #000000 !important;
+}
+
+.text-gray-600 {
+  color: #000000 !important;
+}
+
+.text-gray-700 {
+  color: #000000 !important;
+}
+
+/* In dark mode, explicitly set text colors for visibility */
+.dark .text-gray-500,
+.dark .text-gray-600,
+.dark .text-gray-700 {
+  color: #000000 !important;
+}
