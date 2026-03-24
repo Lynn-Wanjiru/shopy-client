@@ -1,0 +1,22 @@
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="128" height="128" fill="#FFF5EB" rx="24"/>
+  
+  <!-- Orange accent border -->
+  <rect width="128" height="128" fill="none" stroke="#FB923C" stroke-width="2" rx="24"/>
+  
+  <!-- Shopping Bag (Main Icon) -->
+  <g transform="translate(64, 64)">
+    <!-- Bag body -->
+    <path d="M -24 -8 L -24 28 Q -24 40 -12 40 L 12 40 Q 24 40 24 28 L 24 -8 Z" 
+          fill="#FB923C" stroke="#EA580C" stroke-width="1.5"/>
+    
+    <!-- Bag handle -->
+    <path d="M -16 -8 Q -16 -24 0 -24 Q 16 -24 16 -8" 
+          fill="none" stroke="#FB923C" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Subtle shines for dimension -->
+    <ellipse cx="-12" cy="8" rx="6" ry="8" fill="white" opacity="0.3"/>
+    <ellipse cx="10" cy="20" rx="4" ry="6" fill="white" opacity="0.2"/>
+  </g>
+</svg>
