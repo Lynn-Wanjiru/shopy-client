@@ -7,7 +7,13 @@ export const useDarkModeStore = defineStore('darkMode', () => {
   // Load dark mode preference from localStorage
   const initDarkMode = () => {
     const saved = localStorage.getItem('darkMode') === 'true'
-    isDarkMode.value = saved
+    
+    // Check if device is mobile (viewport width < 768px)
+    const isMobile = window.innerWidth < 768
+    
+    // Mobile: Always start in light mode (false)
+    // Desktop: Use saved preference from localStorage
+    isDarkMode.value = isMobile ? false : saved
     applyDarkMode()
   }
 
