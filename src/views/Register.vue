@@ -121,15 +121,19 @@ const handleRegister = async () => {
     submitting.value = true
     errMessage.value = ''
 
-    await authStore.register(
+    const result = await authStore.register(
       form.value.email,
       form.value.password,
       form.value.firstName,
       form.value.lastName
     )
 
-    // Redirect to login page after email registration
-    router.push('/login')
+    // Only redirect if registration was successful
+    if (result.success) {
+      router.push('/login')
+    } else {
+      errMessage.value = result.message || 'Registration failed'
+    }
   } catch (error: any) {
     errMessage.value = error.message || 'Registration failed'
   } finally {
