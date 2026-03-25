@@ -472,39 +472,39 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- Product Detail Modal -->
-    <div v-if="showModal" @click="closeModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-lg">
+    <div v-if="showModal" @click="closeModal" class="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black bg-opacity-50">
       <div
         @click.stop
-        class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[80vh] flex flex-row overflow-hidden"
+        class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] flex flex-col md:flex-row overflow-y-auto md:overflow-hidden"
       >
-        <!-- Image Section (Left Side) -->
-        <div class="w-2/5 bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-6 overflow-hidden">
+        <!-- Image Section (Top on mobile, Left on desktop) -->
+        <div class="w-full md:w-2/5 bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-4 sm:p-6 flex-shrink-0">
           <img
             :src="selectedProduct?.imageUrl"
             :alt="selectedProduct?.name"
-            class="w-full h-full object-cover rounded-lg"
+            class="w-full h-auto md:h-full object-cover rounded-lg max-h-[300px] md:max-h-none"
           />
         </div>
 
-        <!-- Info Section (Right Side) -->
-        <div class="w-3/5 flex flex-col p-8 overflow-hidden">
+        <!-- Info Section (Bottom on mobile, Right on desktop) -->
+        <div class="w-full md:w-3/5 flex flex-col p-4 sm:p-8 overflow-y-auto">
           <!-- Header with Wishlist & Close -->
           <div class="flex justify-between items-start mb-4">
-            <h2 class="text-3xl font-bold text-gray-900 dark:text-white flex-1 mr-4">{{ selectedProduct?.name }}</h2>
-            <div class="flex items-center space-x-3 flex-shrink-0">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white flex-1 mr-4">{{ selectedProduct?.name }}</h2>
+            <div class="flex items-center space-x-2 sm:space-x-3 flex-shrink-0">
               <!-- Wishlist Toggle Button (Only for logged-in users) -->
               <button
                 v-if="authStore.isAuthenticated"
                 @click.stop="handleToggleWishlist($event, selectedProduct!)"
                 :title="wishlistStore.isInWishlist(selectedProduct?._id || '') ? 'Remove from Wishlist' : 'Add to Wishlist'"
-                class="text-3xl hover:scale-125 transition-transform"
+                class="text-2xl sm:text-3xl hover:scale-125 transition-transform"
               >
                 {{ wishlistStore.isInWishlist(selectedProduct?._id || '') ? '❤️' : '🤍' }}
               </button>
               <!-- Close Button -->
               <button
                 @click="closeModal"
-                class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-3xl font-light hover:scale-110 transition-transform"
+                class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 text-2xl sm:text-3xl font-light hover:scale-110 transition-transform"
               >
                 ✕
               </button>
@@ -517,37 +517,37 @@ onBeforeUnmount(() => {
           </span>
 
           <!-- Description -->
-          <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed flex-shrink-0">
+          <p class="text-gray-600 dark:text-gray-400 mb-6 text-sm sm:text-base leading-relaxed">
             {{ selectedProduct?.description }}
           </p>
 
           <!-- Price Section -->
-          <div class="mb-6 pb-6 border-b dark:border-gray-700 flex-shrink-0">
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 font-medium">Price</p>
-            <p class="text-4xl font-bold text-orange-600">
+          <div class="mb-6 pb-6 border-b dark:border-gray-700">
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2 font-medium">Price</p>
+            <p class="text-3xl sm:text-4xl font-bold text-orange-600">
               KES {{ selectedProduct?.price.toLocaleString() }}
             </p>
           </div>
 
           <!-- Stock Section -->
-          <div class="mb-6 pb-6 border-b dark:border-gray-700 flex-shrink-0">
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 font-medium">Availability</p>
+          <div class="mb-6 pb-6 border-b dark:border-gray-700">
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2 font-medium">Availability</p>
             <p :class="[
-              'text-lg font-bold',
-              (selectedProduct?.stock || 0) > 0 ? 'text-green-600' : 'text-red-600'
+              'text-base sm:text-lg font-bold',
+              (selectedProduct?.stock || 0) > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
             ]">
               {{ (selectedProduct?.stock || 0) > 0 ? `${selectedProduct?.stock} items available` : 'Out of Stock' }}
             </p>
           </div>
 
           <!-- Action Buttons -->
-          <div class="space-y-3 flex-shrink-0">
+          <div class="space-y-3">
             <!-- Buy Now Button -->
             <button
               @click="handleBuyNow"
               :disabled="!selectedProduct || selectedProduct.stock === 0"
               :class="[
-                'w-full font-bold py-3 px-4 rounded-xl transition text-base',
+                'w-full font-bold py-3 px-4 rounded-xl transition text-sm sm:text-base',
                 (selectedProduct?.stock || 0) > 0
                   ? 'bg-orange-600 hover:bg-orange-700 text-white cursor-pointer shadow-lg hover:shadow-xl'
                   : 'bg-gray-400 text-gray-600 cursor-not-allowed'
@@ -561,9 +561,9 @@ onBeforeUnmount(() => {
               @click="handleAddToCart"
               :disabled="!selectedProduct || selectedProduct.stock === 0"
               :class="[
-                'w-full font-bold py-3 px-4 rounded-xl transition text-base',
+                'w-full font-bold py-3 px-4 rounded-xl transition text-sm sm:text-base',
                 (selectedProduct?.stock || 0) > 0
-                  ? 'border-2 border-orange-600 text-orange-600 hover:bg-orange-50 cursor-pointer'
+                  ? 'border-2 border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-gray-700 cursor-pointer'
                   : 'border-2 border-gray-400 text-gray-600 cursor-not-allowed'
               ]"
             >
